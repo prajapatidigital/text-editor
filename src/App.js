@@ -4,6 +4,9 @@ import './App.css';
 import About from './components/About';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
+import Home from './components/Home'
+import NoPage from './components/NoPage'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   const[mode,setMode]=useState('light');
@@ -22,14 +25,22 @@ function App() {
   }
   return (
     <div className="App">
-    <Navbar mode={mode} toggleMode={toggleMode} />
-
-    <div className="container">
-    <TextForm heading="enter the text for edit"/>
-    {/* <About/> */}
-    </div>
    
- 
+    <BrowserRouter>
+    
+    <Navbar mode={mode} toggleMode={toggleMode} />
+   
+  
+      <Routes>
+        <Route path="/" element={<TextForm heading="enter the text for edit" />}> </Route>
+        <Route index element={<TextForm heading="enter the text for edit" />} />
+        
+          <Route path="home" element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="*" element={<NoPage />} />
+        
+      </Routes>
+    </BrowserRouter>
 
 
 
